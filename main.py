@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, render_template
 import cgi
 import os
 import jinja2
@@ -16,5 +16,18 @@ app.config["DEBUG"] = True
 def get_index():
     template = jinja_env.get_template("usersignup.html")
     return template.render()
+
+@app.route("/", methods = ["POST"])
+def form_index():
+
+    username = request.form["username"]
+    password = request.form["password"]
+    email = request.form["email"]
+
+    username_error = ""
+    password_error = ""
+
+
+
 
 app.run()
