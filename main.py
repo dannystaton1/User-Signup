@@ -12,7 +12,7 @@ app.config["DEBUG"] = True
 
 
 
-@app.route("/sign_up_form")
+@app.route("/")
 def sign_up_form():
     template = jinja_env.get_template("usersignup.html")
     return template.render()
@@ -63,7 +63,7 @@ def email_periods(x):
         return True
     else:
         return False
-@app.route("/fom_complete", methods = ["GET" , "POST"])
+@app.route("/", methods = ["GET" , "POST"])
 def form_complete():
     
  
@@ -204,12 +204,18 @@ def form_complete():
 
     
     if not username_error and not password_error and not verfiy_password_error and not email_error:
-        my_form = form.format( username_error=username_error, username=username, password_error=password_error, password=password,verfiy_password_error=verfiy_password_error, verfiy_password=verfiy_password, email_error=email_error, email=email)  
+        
         username = username
-        return redirect('/welcome?username={0}'.format(username))
+        return redirect('/welcome_page.html?username={0}'.format(username))
     else:
-        return my_form
+        return render_template("usersignup.html", username_error=username_error, username=username, password_error=password_error, password=password,verfiy_password_error=verfiy_password_error, verfiy_password=verfiy_password, email_error=email_error, email=email)  
 
+
+@app.route("/", methods=['GET', 'POST'])
+def welcome():
+
+    username = request.args.get('username')
+    return render_template('welcome_page.html', username=username)
 
 
 
