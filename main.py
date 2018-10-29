@@ -12,10 +12,10 @@ app.config["DEBUG"] = True
 
 
 
-@app.route("/")
+@app.route("/", methods = ["GET"])
 def sign_up_form():
-    template = jinja_env.get_template("usersignup.html")
-    return template.render()
+   
+    return render_template("usersignup.html")
 
 
 
@@ -36,7 +36,7 @@ def value_length(x):
 
 
 def email(x): 
-    if x.comt("@") >= 1:
+    if x.count("@") >= 1:
         return True
     else:
         return False
@@ -52,7 +52,7 @@ def email_2(x):
 
 
 def email3(x):
-    if x.comt(".") >= 1:
+    if x.count(".") >= 1:
         return True
     else:
         return False
@@ -63,14 +63,16 @@ def email_periods(x):
         return True
     else:
         return False
-@app.route("/", methods = ["GET" , "POST"])
+
+
+@app.route("/", methods = ["POST"])
 def form_complete():
     
  
-    username = request.form["username"]
-    password = request.form["password"]
-    verfiy_password = request.form["verfiy_password"]
-    email = request.form["email"]
+    username = request.form['username']
+    password = request.form['password']
+    verfiy_password = request.form['verfiy_password']
+    email = request.form['email']
     
     
     
@@ -211,11 +213,11 @@ def form_complete():
         return render_template("usersignup.html", username_error=username_error, username=username, password_error=password_error, password=password,verfiy_password_error=verfiy_password_error, verfiy_password=verfiy_password, email_error=email_error, email=email)  
 
 
-@app.route("/welcome", methods=['GET', 'POST'])
+@app.route("/")
 def welcome():
 
-    username = request.args.get('username')
-    return render_template('welcome_page.html', username=username)
+    username = request.args.get("username")
+    return render_template("welcome_page.html", username=username)
 
 
 
