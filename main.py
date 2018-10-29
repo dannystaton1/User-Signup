@@ -35,7 +35,7 @@ def value_length(x):
 
 
 
-def email(x): 
+def email_address(x): 
     if x.count("@") >= 1:
         return True
     else:
@@ -71,14 +71,14 @@ def form_complete():
  
     username = request.form['username']
     password = request.form['password']
-    verfiy_password = request.form['verfiy_password']
+    verify_password= request.form['verify_password']
     email = request.form['email']
     
     
     
     username_error = ""
     password_error = ""
-    verfiy_password_error = ""
+    verify_passwrod_error = ""
     email_error = ""
 
 
@@ -91,15 +91,15 @@ def form_complete():
     if not value(password):
         password_error = field_error
         password = ''
-        verfiy_password = ''
+        verify_password= ''
    
    
    
     elif not value_length(password):
         password_error = "Password " + count
         password = ''
-        verfiy_password = ''
-        verfiy_password_error = invaild_password
+        verify_password= ''
+        verify_passwrod_error = invaild_password
    
    
    
@@ -107,15 +107,15 @@ def form_complete():
         if " " in password:
             password_error = "Password " + user_pass_error
             password = ''
-            verfiy_password = ''
-            verfiy_password_error = invaild_password
+            verify_password= ''
+            verify_passwrod_error = invaild_password
 
   
 
-    if verfiy_password != password:
-        verfiy_password_error = "Passwords must match"
+    if verify_password!= password:
+        verify_passwrod_error = "Passwords must match"
         password = ''
-        verfiy_password = ''
+        verify_password= ''
         password_error = 'Passwords must match'
             
 
@@ -123,9 +123,9 @@ def form_complete():
     if not value(username):
         username_error = field_error
         password = ''
-        verfiy_password = ''
+        verify_password= ''
         password_error = invaild_password
-        verfiy_password_error = invaild_password
+        verify_passwrod_error = invaild_password
    
    
    
@@ -133,9 +133,9 @@ def form_complete():
     elif not value_length(username):
         username_error = "Username " + count
         password = ''
-        verfiy_password = ''
+        verify_password= ''
         password_error = invaild_password
-        verfiy_password_error = invaild_password
+        verify_passwrod_error = invaild_password
    
    
    
@@ -143,9 +143,9 @@ def form_complete():
         if " " in username:
             username_error = "Username " + user_pass_error
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
 
   
 
@@ -155,43 +155,43 @@ def form_complete():
         if not value_length(email):
             email_error = "Email " + count
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
         
         
         
-        elif not email(email):
+        elif not email_address(email):
             email_error = "Email must contain the @ symbol"
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
         
         
         elif not email_2(email):
             email_error = "Email must contain only one @ symbol"
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
         
         
         
         elif not email3(email):
             email_error = "Email must contain ."
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
         
         
         elif not email_periods(email):
             email_error = "Email must contain only one ."
             password = ''
-            verfiy_password = ''
+            verify_password= ''
             password_error = invaild_password
-            verfiy_password_error = invaild_password
+            verify_passwrod_error = invaild_password
         
         
         
@@ -200,20 +200,20 @@ def form_complete():
             if " " in email:
                 email_error = "Email " + user_pass_error
                 password = ''
-                verfiy_password = ''
+                verify_password= ''
                 password_error = invaild_password
-                verfiy_password_error = invaild_password
+                verify_passwrod_error = invaild_password
 
     
-    if not username_error and not password_error and not verfiy_password_error and not email_error:
+    if not username_error and not password_error and not verify_passwrod_error and not email_error:
         
         username = username
         return redirect('/welcome?username={0}'.format(username))
     else:
-        return render_template("usersignup.html", username_error=username_error, username=username, password_error=password_error, password=password,verfiy_password_error=verfiy_password_error, verfiy_password=verfiy_password, email_error=email_error, email=email)  
+        return render_template("usersignup.html", username_error=username_error, username=username, password_error=password_error, password=password,verify_passwrod_error=verify_passwrod_error, verify_password=verify_password, email_error=email_error, email=email)  
 
 
-@app.route("/")
+@app.route("/welcome", methods=['GET', 'POST'])
 def welcome():
 
     username = request.args.get("username")

@@ -6,6 +6,7 @@
         body{
                 display: block;
                 margin: 8px;
+                
             }
         .error{
                 color: red;
@@ -18,28 +19,28 @@
         <h1>Sign Up Page</h1>
 
         
-        <form action = "/" method = "POST">
+        <form method = "POST">
         
         <label for ="username">UserName</label>
         <input name = "username" type = "text" value ="{{username}}"/>
-        <span class = "error"></span> 
+        <span class="error">{{username_error}}</span> 
         <br>
         
         
         <label for = "password">Password</label>
-        <input name =  "password" type = "text" value = "{{password}}"/>
-        <span class = "error"></span> 
+        <input name =  "password" type = "password" value = "{{password}}"/>
+        <span class="error">{{password_error}}</span>
         <br>
 
 
         <label for ="verfiy_password">Verfiy Password</label>
-        <input name = "verfiy_password" type = "text" value = "{{verify_password}}"/>
-        <span class = "error"></span> 
+        <input name = "verify_password" type = "password" value = "{{verify_password}}"/>
+        <span class="error">{{verify_password_error}}</span> 
         <br>
         
         <label for = "email">Email (optional)</label>
         <input name = "email" type = "text" value = "{{email}}"/>
-        <span class = "error"></span> 
+        <span class="error">{{email_error}}</span>
         <br>
         
         
