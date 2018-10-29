@@ -206,12 +206,12 @@ def form_complete():
     if not username_error and not password_error and not verfiy_password_error and not email_error:
         
         username = username
-        return redirect('/welcome_page.html?username={0}'.format(username))
+        return redirect('/welcome?username={0}'.format(username))
     else:
         return render_template("usersignup.html", username_error=username_error, username=username, password_error=password_error, password=password,verfiy_password_error=verfiy_password_error, verfiy_password=verfiy_password, email_error=email_error, email=email)  
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/welcome", methods=['GET', 'POST'])
 def welcome():
 
     username = request.args.get('username')
